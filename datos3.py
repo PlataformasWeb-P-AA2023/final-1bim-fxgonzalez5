@@ -8,8 +8,7 @@ session = Session()
 
 # ----------- Consultas a la Base de Datos -----------
 #* Consulta 1: Los cantones que tiene establecimientos con 0 número de profesores, 5 profesores, 11 profesores
-data = session.query(Establecimiento, Parroquia, Canton).join(Parroquia.canton).filter(Establecimiento.nro_docentes.in_([0, 5, 11]))
-cantones = [d[2].nombre for d in data]
+cantones = session.query(Canton).join(Parroquia).join(Establecimiento).filter(Establecimiento.nro_docentes.in_([0, 5, 11])).all()
 
 print('Consulta 1: Los cantones que tiene establecimientos con 0 número de profesores, 5 profesores, 11 profesores')
 print("""\
@@ -18,7 +17,7 @@ print("""\
 +--------------------+\
 """)
 for canton in set(cantones):
-    print('{1}{0:20s}{1}'.format(canton,'|'))
+    print('{1}{0:20s}{1}'.format(canton.nombre,'|'))
 print('+--------------------+\n')
 
 

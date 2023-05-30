@@ -45,7 +45,7 @@ print("""\
 """)
 for establecimiento in establecimientos:
     print('{2}{0:46s}{2}{1:8s}{2}'.format(establecimiento.nombre, establecimiento.parroquia.canton.nombre, '|'))
-print('+---------------------------parroquia-----------------------------+')
+print('+--------------------------------------------------------+')
 
 #* Consulta 4: Todos los establecimientos del cantón de Zamora
 datos = session.query(Establecimiento).join(Parroquia).join(Canton).filter(Canton.nombre == 'ZAMORA').all()
