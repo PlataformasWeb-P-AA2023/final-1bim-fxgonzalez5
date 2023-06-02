@@ -23,15 +23,15 @@ print('+--------------------+\n')
 
 #* Consulta 2: Los establecimientos que pertenecen a la parroquia Pindal con estudiantes mayores o iguales a 21
 datos = session.query(Establecimiento).join(Parroquia).filter(Establecimiento.nro_estudiantes >= 21).filter(Parroquia.nombre == "PINDAL").all()
-establecimientos = [[d, d.parroquia] for d in datos]
+establecimientos = [[d, d.parroquia, d.parroquia.canton, d.parroquia.canton.provincia] for d in datos]
 
 print('Consulta 2: Los establecimientos que pertenecen a la parroquia Pindal con estudiantes mayores o iguales a 21')
 print("""\
-+----------------------------------------------------------------------------+
-| Establecimiento                                                | Parroquia |
-+----------------------------------------------------------------------------+\
++-------------------------------------------------------------------------------------------------+
+| Establecimiento                                                | Parroquia | Cantón | Provincia |
++-------------------------------------------------------------------------------------------------+\
 """)
 for establecimiento in establecimientos:
-    print('{2}{0:64s}{2}{1:11s}{2}'.format(establecimiento[0].nombre, establecimiento[1].nombre, '|'))
-print('+----------------------------------------------------------------------------+')
+    print('{4}{0:64s}{4}{1:11s}{4}{2:8s}{4}{3:11s}{4}'.format(establecimiento[0].nombre, establecimiento[1].nombre, establecimiento[2].nombre, establecimiento[3].nombre, '|'))
+print('+-------------------------------------------------------------------------------------------------+')
 
